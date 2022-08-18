@@ -1,0 +1,6 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/home/blabs/Desktop/JavaFx/json-20220320.jar"
+    ]
+}
