@@ -18,7 +18,7 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import librarifier.BooksToSHA1;
+import librarifier.FileToSHA1;
 
 /**
  * @author Walid
@@ -32,7 +32,7 @@ public class Player {
 	private String finalFile;
 	private String directory;
 	private List<File> books;
-	/* This list contains the last list of available players returned by the hub */
+	/* This list contains the last list of available peers returned by the hub */
 	public List<Player> currentPlayers;
 	PlayerClient playerClient;
 	ServerSocket serverSocket;
@@ -41,9 +41,7 @@ public class Player {
 	InputStream is;
 	OutputStream os;
 	
-	public Player () {
-		
-	}
+	public Player () {}
 	
 	public Player (String ip, int port, String library, List<File> books) {
 		this.ip = ip;
@@ -170,7 +168,7 @@ public class Player {
 		
 		/* Getting the books that are in the directory */
 		for (int i = 0; i < numberOfBooks; i++) {
-			File book = new File(directory + "\\Book" + i);
+			File book = new File(directory + "\\File" + i);
 			if(book.exists() && !book.isDirectory()) { 
 			    books.add(i, book);
 			}
@@ -181,30 +179,30 @@ public class Player {
 		
 		/* Get SHA1 of books from player's directory */
 		List<String> sha1_player = new ArrayList<String>();
-		sha1_player = BooksToSHA1.booksToSHA1(books);
+		sha1_player = FileToSHA1.booksToSHA1(books);
 		
 		/* Compare the player's SHA1 data with the library file's */
-		List<Integer> invalid_books = new ArrayList<Integer>();
+		List<Integer> invalid_files = new ArrayList<Integer>();
 		for (int i = 0; i < numberOfBooks; i++) {
 			if (books.get(i) == null) {
-				invalid_books.add(i);
+				invalid_files.add(i);
 				continue;
 			}
 			else {
 				if (!sha1_libr.get(i).equals(sha1_player.get(i))) {
-					invalid_books.add(i);
+					invalid_files.add(i);
 				}
 			}
 		}
 		
-		int[] missing_books = new int[invalid_books.size()];
-		if (invalid_books != null) {
-			for (int i = 0; i < missing_books.length; i++) {
-				missing_books[i] = invalid_books.get(i);
+		int[] missing_files = new int[invalid_files.size()];
+		if (invalid_files != null) {
+			for (int i = 0; i < missing_files.length; i++) {
+				missing_files[i] = invalid_files.get(i);
 			}
 		}
 		
-		return missing_books;
+		return missing_files;
 	}
 	
 	public String[] getHubAddress () throws IOException {

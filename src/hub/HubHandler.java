@@ -136,12 +136,12 @@ public class HubHandler extends Thread {
 						Thread.sleep(1);
 					}
 					
-					String currentPlayer = socket.getInetAddress().toString() + " " + socket.getPort();
+					String currentPeer = socket.getInetAddress().toString() + " " + socket.getPort();
 					
 					while (true) {
 						/* Read message received from the player */
 						String message = br.readLine();
-						System.out.println("Message received from player " + currentPlayer + " is : " + message);
+						System.out.println("Message received from player " + currentPeer + " is : " + message);
 						
 						/* Parse the JSON message */
 						JSONObject obj = new JSONObject(message);
@@ -181,7 +181,7 @@ public class HubHandler extends Thread {
 								
 								/* Send the list to the player */
 								bw.write(obj3.toString() + "\n");
-								System.out.println("Message sent to the player " + currentPlayer + " is : " + obj3.toString() + "\n");
+								System.out.println("Message sent to the player " + currentPeer + " is : " + obj3.toString() + "\n");
 								bw.flush();
 							}
 							else {
@@ -196,14 +196,13 @@ public class HubHandler extends Thread {
 								
 								/* Send the list to the player */
 								bw.write(obj3.toString() + "\n");
-								System.out.println("Message sent to the player " + currentPlayer + " is : " + obj3.toString() + "\n");
+								System.out.println("Message sent to the player " + currentPeer + " is : " + obj3.toString() + "\n");
 								bw.flush();
 							}
 						}
 					}
 					
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} finally {
 					try {
@@ -211,7 +210,6 @@ public class HubHandler extends Thread {
 						os.close();
 						socket.close();
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

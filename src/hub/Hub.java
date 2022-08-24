@@ -25,6 +25,9 @@ public class Hub extends Thread {
 	List<Player> listOfPlayers = new ArrayList<Player>();
 	List<HubHandler> hubHandler = new ArrayList<HubHandler>();
 	
+	/**
+	 * 
+	 */
 	public Hub () {
 		try {
 			int port = Constants.HUB_PORT;
@@ -67,17 +70,17 @@ public class Hub extends Thread {
 					for (int i = 0; i < 10; i++) {
 						Random rand = new Random();
 						int position;
-						/* To make sure we don't get the same player more than one time */
+						/* To make sure we don't get the same peer more than one time */
 						if (i > 0) {
 							int test;
 							do {
 								test = 0;
-								/* In order not to get the player requesting the list */
+								/* In order not to get the peer requesting the list */
 								do {
 									position = rand.nextInt(this.listOfPlayers.size());
 								}
 								while (position == pos_player);
-								/* We Compare current randomly selected player with previous ones */
+								/* We Compare current randomly selected peer with previous ones */
 								for (int j = 0; j < players.size(); j++) {
 									if (players.get(j).getIp() == this.listOfPlayers.get(position).getIp() && players.get(j).getPort() == this.listOfPlayers.get(position).getPort()) {
 										test = 1;

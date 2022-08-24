@@ -4,7 +4,7 @@
 package librarifier;
 
 /**
- * @author walid
+ * @author GROUP C
  *
  */
 public interface Constants {

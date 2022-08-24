@@ -11,7 +11,7 @@ import java.util.List;
 import player.Player;
 
 /**
- * @author walid
+ * @author GROUP C
  *
  */
 public class Main {
@@ -39,6 +39,6 @@ public class Main {
         /* Generate .libr file */
         System.out.println("Please select where to store the library file");
         String path = Player.selectDirectory("Select where to store the library file");
-        LibraryFile.libraryFile(books, stuff, path);
+        FileLibrary.libraryFile(books, stuff, path);
     }
 }

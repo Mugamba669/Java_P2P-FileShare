@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import librarifier.BookToBytes;
+import librarifier.FiletoBytes;
 import librarifier.FileSplit;
 
 /**
@@ -313,7 +313,7 @@ public class PlayerClient extends Thread {
 
 								/* Checking if the books received are valid */
 								for (int  j= 0; j < books_received.size(); j++) {
-									BookToBytes.bytesToBook(books_received.get(j), player);
+									FiletoBytes.bytesToBook(books_received.get(j), player);
 								}
 
 								if (checkIfAllBookReceived(player) == true) {

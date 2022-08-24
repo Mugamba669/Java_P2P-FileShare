@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Walid
+ * @author Group C
  *
  */
 public class PlayerServer {
@@ -23,10 +23,8 @@ public class PlayerServer {
 		try {
 			player.serverSocket = new ServerSocket(0);
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

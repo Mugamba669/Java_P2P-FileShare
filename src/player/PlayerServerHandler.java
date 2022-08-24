@@ -18,10 +18,10 @@ import java.util.concurrent.BlockingQueue;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import librarifier.BookToBytes;
+import librarifier.FiletoBytes;
 
 /**
- * @author Walid
+ * @author Group C 
  *
  */
 public class PlayerServerHandler {
@@ -56,11 +56,11 @@ public class PlayerServerHandler {
 
 					String message = (String) blockingQueue.take();
 
-					System.out.println("Books that the player " + player.getIp() + " " + player.getPortAsServer() + " is requesting : " + message);
+					System.out.println("Files that the player " + player.getIp() + " " + player.getPortAsServer() + " is requesting : " + message);
 
 					/* Getting the requested player's missing books */
 					int[] missing_books = player.missingBooks();
-					System.out.print("The books i'm missing : [");
+					System.out.print("The files i'm missing : [");
 					for (int j = 0; j < missing_books.length; j++) {
 						System.out.print(missing_books[j] + ", ");
 					}
@@ -104,32 +104,32 @@ public class PlayerServerHandler {
 
 					/* If there's available books to send */
 					if (books_to_send.length > 0) {
-						JSONObject books_sending = new JSONObject();
+						JSONObject file_sending = new JSONObject();
 						JSONObject obj2 = new JSONObject();
 						obj2.put("books", Arrays.toString(books_to_send));
 						obj2.put("id", 1);
-						books_sending.put("res_player", obj2);
+						file_sending.put("res_player", obj2);
 
-						System.out.println("Message sent to player is : " + books_sending.toString());
+						System.out.println("Message sent to player is : " + file_sending.toString());
 						
-						oos.writeObject(books_sending.toString());
+						oos.writeObject(file_sending.toString());
 
 						/* Get the books to send */
 						List<byte[]> books_bytes = new ArrayList<byte[]>();
 						for (int j = 0; j < books_to_send.length; j++) {
-							books_bytes.add(BookToBytes.bookToBytes(player.getDirectory() + "\\Book" + books_to_send[j]));
+							books_bytes.add(FiletoBytes.bookToBytes(player.getDirectory() + "\\Book" + books_to_send[j]));
 						}
 						
 						oos.writeObject(books_bytes);
 					}
 					/* If there's no available books to send */
 					else {
-						JSONObject books_sending = new JSONObject();
+						JSONObject file_sending = new JSONObject();
 						JSONObject obj2 = new JSONObject();
 						obj2.put("id", 2);
-						books_sending.put("res_player", obj2);
+						file_sending.put("res_player", obj2);
 
-						oos.writeObject(books_sending.toString());
+						oos.writeObject(file_sending.toString());
 					}
 					
 				} catch (IOException | InterruptedException e) {

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author walid
+ * @author GROUP C
  *
  */
 public class FileSplit {
@@ -31,8 +31,8 @@ public class FileSplit {
 
 			int bytesAmount = 0;
 			while ((bytesAmount = bis.read(buffer)) > 0) {
-				/* write each book into separate files with different number in name */
-				String filePartName = String.format("%s%d", "Book", bookCounter++);
+				/* write each file into separate files with different number in name */
+				String filePartName = String.format("%s%d", "File", bookCounter++);
 				File newFile = new File(path, filePartName);
 				try (FileOutputStream out = new FileOutputStream(newFile)) {
 					out.write(buffer, 0, bytesAmount);

@@ -20,10 +20,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import librarifier.FileSplit;
-import librarifier.LibraryFile;
+import librarifier.FileLibrary;
 
 /**
- * @author Walid
+ * @author Group C
  *
  */
 public class PlayerMain {
@@ -37,15 +37,15 @@ public class PlayerMain {
 		frame.setTitle("Download or Upload stuff ?");
 		frame.setSize(400, 200);
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
-		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+		int x = (int) ((dimension.getWidth() - frame.getWidth()) / 1.5);
+		int y = (int) ((dimension.getHeight() - frame.getHeight()) / 1.5);
 		frame.setLocation(x, y);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		
 		while (!action.equals("d") && !action.equals("u")) {
 			JButton download_btn = new JButton("Download");
-			download_btn.setBounds(50, 60, 100, 30); /* Distance from left, Distance from top,length of button, height of button */
+			download_btn.setBounds(70, 60, 140, 30); /* Distance from left, Distance from top,length of button, height of button */
 			frame.getContentPane().add(download_btn);
 			download_btn.addActionListener(new ActionListener() {
 	
@@ -143,7 +143,7 @@ public class PlayerMain {
 	        books = FileSplit.splitFile(new File(stuff), directory);
 	        player.setBooks(books);
 	        /* Generate the library file in the default directory */
-	        player.setLibrary(LibraryFile.libraryFile(books, stuff, directory));
+	        player.setLibrary(FileLibrary.libraryFile(books, stuff, directory));
 			
 			player.setPortAsServer(-1);
 			
